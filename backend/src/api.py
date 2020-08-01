@@ -95,16 +95,20 @@ def patch_drinks(payload, id):
 	})
 
 
-'''
-@TODO implement endpoint
-	DELETE /drinks/<id>
-		where <id> is the existing model id
-		it should respond with a 404 error if <id> is not found
-		it should delete the corresponding row for <id>
-		it should require the 'delete:drinks' permission
-	returns status code 200 and json {"success": True, "delete": id} where id is the id of the deleted record
-		or appropriate status code indicating reason for failure
-'''
+@app.route('/drinks/<int:id>', methods=['DELETE'])
+@requires_auth('delete:drinks')
+def delete_drink(payload, id):
+	drinkToDelete = Drink.query.get(id)
+
+	if drinkToDelete is None:
+		abort(404)
+
+	drinkToDelete.delete()
+
+	return jsonify({
+		'success': True,
+		'delete': id
+	})
 
 
 ## Error Handling
