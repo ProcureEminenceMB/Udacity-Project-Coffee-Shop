@@ -59,9 +59,9 @@ def check_permissions(permission, payload):
 
 	if permission not in payload['permissions']: # Check for required permission
 		raise AuthError({
-			'code': 'forbidden',
-			'description': 'You don\'t have access to this feature.'
-		}, 403)
+			'code': 'unauthorized',
+			'description': 'You cannot access to this feature.'
+		}, 401)
 	return True
 
 def verify_decode_jwt(token):
