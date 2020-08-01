@@ -25,6 +25,7 @@ def get_drinks():
 			'success': True,
 			'drinks': [drink.short() for drink in drinkList]
 		}), 200
+
 	except Exception:
 		abort(404)
 
