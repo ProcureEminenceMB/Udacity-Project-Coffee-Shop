@@ -129,6 +129,14 @@ def unauthorized(error):
 		"message": "Unauthorized"
 	}), 401
 
+@app.errorhandler(403)
+def unauthorized(error):
+	return jsonify({
+		"success": False,
+		"error": 403,
+		"message": "Forbidden"
+	}), 401
+
 @app.errorhandler(404)
 def not_found(error):
 	return jsonify({
