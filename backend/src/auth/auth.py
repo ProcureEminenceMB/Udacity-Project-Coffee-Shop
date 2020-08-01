@@ -26,8 +26,8 @@ def get_token_auth_header():
 	# Raise error if no authorization header was found
 	if authHeader is None:
 		raise AuthError({
-		'code': 'auth_header_missing',
-		'description': 'No authorization header was found.'
+			'code': 'auth_header_missing',
+			'description': 'No authorization header was found.'
 		}, 401)
 
 	# Split authorization header and analyze
@@ -35,8 +35,8 @@ def get_token_auth_header():
 
 	if len(authDetails) != 2: # Authorization header must be two parts; type and token
 		raise AuthError({
-		'code': 'auth_header_invalid',
-		'description': 'Authorization header must contain the token type and the token.'
+			'code': 'auth_header_invalid',
+			'description': 'Authorization header must contain the token type and the token.'
 		}, 401)
 
 	authType = authDetails[0]
@@ -44,8 +44,8 @@ def get_token_auth_header():
 
 	if authType != 'Bearer': # Authorization header must be bearer
 		raise AuthError({
-		'code': 'auth_header_invalid',
-		'description': 'Authorization header must use a Bearer token.'
+			'code': 'auth_header_invalid',
+			'description': 'Authorization header must use a Bearer token.'
 		}, 401)
 
 	return authToken
