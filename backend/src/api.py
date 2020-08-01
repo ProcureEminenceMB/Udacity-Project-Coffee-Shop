@@ -12,7 +12,7 @@ setup_db(app)
 CORS(app)
 
 ## DB SETUP
-#db_drop_and_create_all()
+db_drop_and_create_all()
 
 ## ROUTES
 
@@ -152,3 +152,11 @@ def unprocessable(error):
 		"error": 422,
 		"message": "Unprocessable Entity"
 	}), 422
+
+@app.errorhandler(AuthError)
+def handle_auth_error(error):
+	return jsonify({
+		"success": False,
+		"error": error.status_code,
+		'message': error.error
+	}), 401
